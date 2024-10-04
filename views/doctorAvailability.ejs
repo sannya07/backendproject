@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= doctor.name %> Availability</title>
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-md shadow-md">
+      <h2 class="text-3xl font-bold text-gray-700 mb-4">Availability for Dr. <%= doctor.name %></h2>
+      
+      <h3 class="text-xl font-bold mt-4">Available Times:</h3>
+      <ul class="mt-2">
+        <% availableTimes.forEach(function(time) { %>
+          <li class="mt-2">
+            <input type="radio" name="appointmentTime" value="<%= time %>" required>
+            <span><%= new Date(time).toLocaleString() %></span>
+          </li>
+        <% }); %>
+      </ul>
+
+      <form action="/confirm-appointment" method="POST" class="mt-6 space-y-4">
+        <input type="hidden" name="doctor" value="<%= doctor.name %>">
+
+        <div>
+          <label for="diseaseDescription" class="block text-gray-600">Describe your condition</label>
+          <textarea name="diseaseDescription" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" required></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-blue-600">Book Appointment</button>
+      </form>
+
+      <a href="/dashboard" class="block mt-6 bg-blue-600 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-700">Back to Dashboard</a>
+    </div>
+  </div>
+</body>
+</html>
